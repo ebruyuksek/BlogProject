@@ -1,10 +1,4 @@
-﻿using Core.Abstract;
-using Core.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Concrete;
 
 namespace Core.Entities
 {
@@ -13,5 +7,10 @@ namespace Core.Entities
         public string Title { get; set; } = null!;
         public string Text { get; set; } = null!;
         public string? ImageUrl { get; set; }
+        public Guid PostCategoryId { get; set; }
+
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public required virtual PostCategory PostCategory { get; set; }
+
     }
 }
