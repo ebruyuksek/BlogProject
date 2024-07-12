@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Attributes\" />
-    <Folder Include="Concrete\" />
     <Folder Include="DataAccess\" />
     <Folder Include="Extensions\" />
     <Folder Include="Utilities\" />
