@@ -3,6 +3,7 @@ using Core.Entities;
 
 namespace DataAccess.Abstract
 {
-    public interface IPostDal : IEntityFrameworkRepository<Post>;
-   
+    public interface IPostCategoryDal : IEntityFrameworkRepository<PostCategory>
+    {
+    }
 }

@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class AdminUser : Entity
     {
-        public required string UserName { get; set; }
-        public required string HashedPassword { get; set; }
+        public string UserName { get; set; } = null!;
+        public string HashedPassword { get; set; } = null!;
     }
 }

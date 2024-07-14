@@ -10,7 +10,7 @@ namespace Core.Entities
         public Guid PostCategoryId { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
-        public required virtual PostCategory PostCategory { get; set; }
+        public virtual PostCategory PostCategory { get; set; }
 
     }
 }

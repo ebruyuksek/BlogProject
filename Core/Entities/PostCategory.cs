@@ -4,7 +4,7 @@ namespace Core.Entities
 {
     public class PostCategory : Entity
     {
-        public required string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public ICollection<Post> Posts { get; set; }
     }
