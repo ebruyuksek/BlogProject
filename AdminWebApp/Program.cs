@@ -1,12 +1,7 @@
-using DataAccess.Context;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-builder.Services.AddDbContext<MainDbContext>();
 
 var app = builder.Build();
 
@@ -24,7 +19,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
 
 app.MapControllerRoute(
     name: "default",

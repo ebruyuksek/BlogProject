@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,7 +51,6 @@ namespace DataAccess.Migrations
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
                     PostCategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PostCategoryId1 = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsPassive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -64,12 +63,7 @@ namespace DataAccess.Migrations
                         column: x => x.PostCategoryId,
                         principalTable: "PostCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Posts_PostCategories_PostCategoryId1",
-                        column: x => x.PostCategoryId1,
-                        principalTable: "PostCategories",
-                        principalColumn: "Id");
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,7 +73,6 @@ namespace DataAccess.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     PostId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
-                    PostId1 = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsPassive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -92,35 +85,18 @@ namespace DataAccess.Migrations
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_Posts_PostId1",
-                        column: x => x.PostId1,
-                        principalTable: "Posts",
-                        principalColumn: "Id");
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
                 table: "Comments",
-                column: "PostId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_PostId1",
-                table: "Comments",
-                column: "PostId1");
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_PostCategoryId",
                 table: "Posts",
-                column: "PostCategoryId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_PostCategoryId1",
-                table: "Posts",
-                column: "PostCategoryId1");
+                column: "PostCategoryId");
         }
 
         /// <inheritdoc />

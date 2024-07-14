@@ -7,6 +7,7 @@ namespace Core.Entities
         public Guid PostId { get; set; }
         public required string Text { get; set; }
 
-        public required virtual Post Post { get; set; }
+        public virtual Post Post { get; set; }
+
     }
 }

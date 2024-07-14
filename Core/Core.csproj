@@ -8,9 +8,12 @@
 
   <ItemGroup>
     <Folder Include="Attributes\" />
-    <Folder Include="DataAccess\" />
     <Folder Include="Extensions\" />
     <Folder Include="Utilities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
   </ItemGroup>
 
 </Project>
