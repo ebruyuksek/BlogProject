@@ -3,6 +3,7 @@ using System;
 using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240714081306_EntitiesAdde1d")]
+    partial class EntitiesAdde1d
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
@@ -53,6 +56,9 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("DenemeInt")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsPassive")
                         .HasColumnType("INTEGER");

@@ -9,7 +9,7 @@ namespace Core.Entities
         public string? ImageUrl { get; set; }
         public Guid PostCategoryId { get; set; }
 
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Comment> Comments { get; set; }
         public required virtual PostCategory PostCategory { get; set; }
 
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class EntitiesAdded : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,6 +50,8 @@ namespace DataAccess.Migrations
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    PostCategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PostCategoryId1 = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsPassive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -57,6 +59,17 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Posts_PostCategories_PostCategoryId",
+                        column: x => x.PostCategoryId,
+                        principalTable: "PostCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_PostCategories_PostCategoryId1",
+                        column: x => x.PostCategoryId1,
+                        principalTable: "PostCategories",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -64,9 +77,9 @@ namespace DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PostId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PostId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
-                    PostId1 = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PostId1 = table.Column<Guid>(type: "TEXT", nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsPassive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -75,17 +88,39 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Comments_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Comments_Posts_PostId1",
                         column: x => x.PostId1,
                         principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_PostId",
+                table: "Comments",
+                column: "PostId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId1",
                 table: "Comments",
                 column: "PostId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_PostCategoryId",
+                table: "Posts",
+                column: "PostCategoryId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_PostCategoryId1",
+                table: "Posts",
+                column: "PostCategoryId1");
         }
 
         /// <inheritdoc />
@@ -98,10 +133,10 @@ namespace DataAccess.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "PostCategories");
+                name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "PostCategories");
         }
     }
 }

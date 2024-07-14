@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240712184326_EntitiesAdded")]
-    partial class EntitiesAdded
+    [Migration("20240714080212_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,10 +60,10 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsPassive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<Guid>("PostId1")
+                    b.Property<Guid?>("PostId1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Text")
@@ -74,6 +74,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PostId")
+                        .IsUnique();
 
                     b.HasIndex("PostId1");
 
@@ -95,6 +98,12 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsPassive")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid>("PostCategoryId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("PostCategoryId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -107,6 +116,11 @@ namespace DataAccess.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PostCategoryId")
+                        .IsUnique();
+
+                    b.HasIndex("PostCategoryId1");
 
                     b.ToTable("Posts");
                 });
@@ -138,12 +152,41 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Core.Entities.Comment", b =>
                 {
                     b.HasOne("Core.Entities.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.Comment", "PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.Post", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId1");
+
                     b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Core.Entities.Post", b =>
+                {
+                    b.HasOne("Core.Entities.PostCategory", "PostCategory")
+                        .WithOne()
+                        .HasForeignKey("Core.Entities.Post", "PostCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.PostCategory", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("PostCategoryId1");
+
+                    b.Navigation("PostCategory");
+                });
+
+            modelBuilder.Entity("Core.Entities.Post", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Core.Entities.PostCategory", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }
