@@ -1,5 +1,4 @@
 ﻿using Core.Entities;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Context
@@ -12,5 +11,18 @@ namespace DataAccess.Context
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostCategory> PostCategories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AdminUser>().HasData(
+                new AdminUser
+                {
+                    UserName = "Ebruly",
+                    HashedPassword =  BCrypt.Net.BCrypt.HashPassword("123"),
+                }
+            );
+
+        }
+
     }
 }
