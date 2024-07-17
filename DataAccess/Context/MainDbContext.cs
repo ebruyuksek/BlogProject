@@ -17,8 +17,20 @@ namespace DataAccess.Context
             modelBuilder.Entity<AdminUser>().HasData(
                 new AdminUser
                 {
+                    Id = 1,
                     UserName = "Ebruly",
-                    HashedPassword =  BCrypt.Net.BCrypt.HashPassword("123"),
+                    HashedPassword =  BCrypt.Net.BCrypt.HashPassword("123")
+                    
+                }
+            );
+
+            modelBuilder.Entity<PostCategory>().HasData(
+                new PostCategory
+                {
+                    Id = 1,
+                    Name = "Sağlıksal Takviyeler",
+                    IsPassive = false,
+                    CreatedDateTime = DateTime.Now                 
                 }
             );
 

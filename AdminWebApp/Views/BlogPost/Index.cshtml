@@ -1,0 +1,19 @@
+﻿@using AdminWebApp.Models.BlogPost
+@model BlogPostListViewModel
+
+@{
+
+}
+
+<div>
+
+    <ul>
+        @foreach (var item in Model.BlogPosts)
+        {
+            <li>
+                @item.Title (@item.CreatedDateTime)
+            </li>
+        }
+    </ul>
+
+</div>

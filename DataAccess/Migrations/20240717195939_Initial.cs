@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,8 @@ namespace DataAccess.Migrations
                 name: "AdminUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserName = table.Column<string>(type: "TEXT", nullable: false),
                     HashedPassword = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -31,7 +32,8 @@ namespace DataAccess.Migrations
                 name: "PostCategories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -46,11 +48,12 @@ namespace DataAccess.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
-                    PostCategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    PostCategoryId = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsPassive = table.Column<bool>(type: "INTEGER", nullable: false)
@@ -70,8 +73,9 @@ namespace DataAccess.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    PostId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PostId = table.Column<int>(type: "INTEGER", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UpdatedDateTime = table.Column<DateTime>(type: "TEXT", nullable: true),
@@ -87,6 +91,16 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AdminUsers",
+                columns: new[] { "Id", "CreatedDateTime", "HashedPassword", "IsPassive", "UpdatedDateTime", "UserName" },
+                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "$2a$11$1PvtVvUG.opYuJQQSzUw8.QBApcD1kwOnOIsOlg.DDLbtpyFiMOse", false, null, "Ebruly" });
+
+            migrationBuilder.InsertData(
+                table: "PostCategories",
+                columns: new[] { "Id", "CreatedDateTime", "IsPassive", "Name", "UpdatedDateTime" },
+                values: new object[] { 1, new DateTime(2024, 7, 17, 22, 59, 39, 233, DateTimeKind.Local).AddTicks(2661), false, "Sağlıksal Takviyeler", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",

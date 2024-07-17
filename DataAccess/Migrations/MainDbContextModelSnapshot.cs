@@ -19,9 +19,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.AdminUser", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("TEXT");
@@ -43,13 +43,23 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AdminUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HashedPassword = "$2a$11$1PvtVvUG.opYuJQQSzUw8.QBApcD1kwOnOIsOlg.DDLbtpyFiMOse",
+                            IsPassive = false,
+                            UserName = "Ebruly"
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.Comment", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("TEXT");
@@ -57,8 +67,8 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsPassive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -76,9 +86,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("TEXT");
@@ -89,8 +99,8 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsPassive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("PostCategoryId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PostCategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -112,9 +122,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.PostCategory", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("TEXT");
@@ -132,6 +142,15 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PostCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDateTime = new DateTime(2024, 7, 17, 22, 59, 39, 233, DateTimeKind.Local).AddTicks(2661),
+                            IsPassive = false,
+                            Name = "Sağlıksal Takviyeler"
+                        });
                 });
 
             modelBuilder.Entity("Core.Entities.Comment", b =>

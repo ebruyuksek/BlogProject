@@ -5,7 +5,7 @@ namespace Core.Concrete
 {
     public class Entity : IEntity
     {
-        [Key] public Guid Id { get; set; } = Guid.NewGuid();
+        [Key] public int Id { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public DateTime? UpdatedDateTime { get; set; }
         public bool IsPassive { get; set; }
