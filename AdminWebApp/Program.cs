@@ -9,8 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddScoped<IPostService>(new PostService());
-
 builder.Services.AddScoped<IPostDal, PostDal>();
 builder.Services.AddScoped<IPostService, PostService>();
 
