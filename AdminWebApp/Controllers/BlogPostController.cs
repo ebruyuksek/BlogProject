@@ -1,4 +1,5 @@
 ﻿using AdminWebApp.Models.BlogPost;
+using AutoMapper;
 using Bogus;
 using Business.Abstract;
 using Business.Concrete;
@@ -11,10 +12,12 @@ namespace AdminWebApp.Controllers
     public class BlogPostController : Controller
     {
         private readonly IPostService _postBusinessService;
+        private readonly IMapper _mapper;
 
-        public BlogPostController(IPostService postBusinessService)
+        public BlogPostController(IPostService postBusinessService, IMapper mapper)
         {
             _postBusinessService = postBusinessService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -49,6 +52,14 @@ namespace AdminWebApp.Controllers
                  .RuleFor(o => o.Text, f => f.Lorem.Sentence());
                  
             _postBusinessService.Add(post);
+            return View();
+        }
+
+        public IActionResult Edit(UpdatePostViewModel updatePostViewModel)
+        {
+            var post = _mapper.Map<Post>(updatePostViewModel);
+            _postBusinessService.Update(post);
+
             return View();
         }
     }

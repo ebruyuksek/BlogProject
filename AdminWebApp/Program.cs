@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IPostDal, PostDal>();
 builder.Services.AddScoped<IPostService, PostService>();
-
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

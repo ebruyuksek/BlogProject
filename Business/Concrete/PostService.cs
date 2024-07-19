@@ -9,7 +9,7 @@ namespace Business.Concrete
     public class PostService : IPostService
     {
         private readonly IPostDal _postDal;
-        private readonly ILogger _logger;  
+        private readonly ILogger _logger;
 
         public PostService(IPostDal postDal, ILogger<PostService> logger)
         {
@@ -19,13 +19,12 @@ namespace Business.Concrete
 
         public bool Add(Post post)
         {
-            using MainDbContext db = new MainDbContext();
             try
             {
                 post.CreatedDateTime = DateTime.Now;
                 post.PostCategoryId = 1;
-                db.Posts.Add(post);
-                db.SaveChanges();
+                _postDal.Add(post);
+
                 return true;
             }
             catch (Exception ex)
@@ -37,22 +36,44 @@ namespace Business.Concrete
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entity = _postDal.Get(x => x.Id == id, null);
+
+                if (entity != null)
+                    _postDal.Delete(entity);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
         }
 
         public Post GetById(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void ServiceTest()
-        {
-
+            try
+            {
+                return _postDal.Get(x => x.Id == id, null); 
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
         }
 
         public bool Update(Post post)
         {
-            throw new NotImplementedException();
+            using MainDbContext context = new MainDbContext();
+            post.UpdatedDateTime = DateTime.Now;
+
+            context.Posts.Update(post);
+            context.SaveChanges();
+
+            return true;
         }
     }
 
