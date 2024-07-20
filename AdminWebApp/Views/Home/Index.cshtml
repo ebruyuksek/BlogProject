@@ -1,11 +1,10 @@
 ﻿@{
     Layout = null;
 }
+
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <head>
-    <script src="../assets/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -13,7 +12,7 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>Signin Template · Bootstrap v5.3</title>
 
-    <link rel="stylesheet" href="@(Url.Content("/lib/bootstrap/dist/css/bootstrap.min.css"))">
+    <link rel="stylesheet" href="@(Url.Content("/lib/bootstrap/css/bootstrap.min.css"))">
 
     <style>
         .bd-placeholder-img {
@@ -94,15 +93,12 @@
     </style>
 
 
-    <!-- Custom styles for this template -->
-    <link href="@(Url.Content("/css/site.css"))" rel="stylesheet">
 </head>
 
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
-    <main class="form-signin w-100 m-auto">
-        <form>
-            <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <main class="form-signin w-35 m-auto;">
+        <form>        
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class="form-floating">
@@ -125,7 +121,7 @@
         </form>
     </main>
 
-    <script src="@(Url.Content("/lib/bootstrap/dist/js/bootstrap.bundle.min.js"))"></script>
+    <script src="@(Url.Content("/lib/bootstrap/js/bootstrap.bundle.min.js"))"></script>
 
 </body>
 </html>
