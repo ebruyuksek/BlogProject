@@ -34,17 +34,6 @@ namespace AdminWebApp.Controllers
             return View(model);
         }
 
-        //public IActionResult Get(Guid postId)
-        //{
-        //    var result = _postDal.Get(x => x.Id == postId, null);
-        //    return View();
-        //}
-
-        //public IActionResult Add(BlogPostAddDto model)
-        //{
-        //    return View();
-        //}
-
         public IActionResult Add()
         {
             var post = new Faker<Post>()

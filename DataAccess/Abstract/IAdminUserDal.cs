@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IAdminUserDal : IEntityFrameworkRepository<AdminUser>
     {
+
     }
 }
