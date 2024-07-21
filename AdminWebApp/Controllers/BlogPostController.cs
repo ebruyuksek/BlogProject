@@ -22,26 +22,28 @@ namespace AdminWebApp.Controllers
 
         public IActionResult Index()
         {
-            var blogPostFaker = new Faker<BlogPostDto>()
-           .RuleFor(o => o.Title, f => f.Lorem.Sentence())
-           .RuleFor(o => o.CreatedDateTime, f => f.Date.Recent());
-
-            var model = new BlogPostListViewModel
-            {
-                BlogPosts = blogPostFaker.Generate(10).ToList()
-            };
-
-            return View(model);
+            
+            //return View(model);
         }
 
         public IActionResult Add()
         {
-            var post = new Faker<Post>()
-                 .RuleFor(o => o.Title, f => f.Lorem.Sentence())
-                 .RuleFor(o => o.Text, f => f.Lorem.Sentence());
-                 
-            _postBusinessService.Add(post);
+            
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(BlogPostCreateViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var post = _mapper.Map<Post>(model);
+            _postBusinessService.Add(post);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(UpdatePostViewModel updatePostViewModel)

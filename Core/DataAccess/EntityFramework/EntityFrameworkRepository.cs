@@ -22,18 +22,20 @@ namespace Core.DataAccess.EntityFramework
             return queryable.FirstOrDefault(filter!);
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter, string[]? includes)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter, string[]? includes)
         {
             using var context = new TContext();
 
             if (includes == null)
-                return context.Set<TEntity>().Where(filter).ToList();
+                return filter == null
+                    ? context.Set<TEntity>().ToList()
+                    : context.Set<TEntity>().Where(filter).ToList();
 
-            var queryable =
-               includes.Aggregate(context.Set<TEntity>().AsQueryable(), (query, include)
-                   => query.Include(include));
-
-            return queryable.ToList();
+            return filter == null
+                ? includes.Aggregate(context.Set<TEntity>().AsQueryable(), (query, include)
+                    => query.Include(include)).ToList()
+                : includes.Aggregate(context.Set<TEntity>().AsQueryable(), (query, include)
+                => query.Include(include).Where(filter)).ToList();
         }
 
         public void Add(TEntity entity)

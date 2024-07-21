@@ -9,7 +9,7 @@ namespace Business.Concrete
     {
         private readonly IAdminUserDal _adminUserDal;
         private readonly ILogger _logger;
-        public AdminUserBusinessService(IAdminUserDal adminUserDal, ILogger logger)
+        public AdminUserBusinessService(IAdminUserDal adminUserDal, ILogger<AdminUserBusinessService> logger)
         {
             _adminUserDal = adminUserDal;
             _logger = logger;   

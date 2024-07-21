@@ -35,33 +35,29 @@ namespace AdminWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [Route("")]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("")]
         public IActionResult Login(LoginDto model)
         {
             if (ModelState.IsValid)
             {
+                //var user = _adminUserBusinessService.GetByUserName(model.UserName);
 
-                //username ile eþleþen bir user nesnesi bulunur. 
-                //first alýnýr
-                //
-
-                var user = _adminUserBusinessService.GetByUserName(model.UserName);
-
-                //user = user.Where(s => s.username.Contains(model.username));
-                if (User.Count() != 0)
-                {
-                    if (User.First().password == model.password)
-                    {
-                        return RedirectToAction("Success");
-                    }
-                }
+                ////user = user.Where(s => s.username.Contains(model.username));
+                //if (User.Count() != 0)
+                //{
+                //    if (User.First().password == model.password)
+                //    {
+                //        return RedirectToAction("Success");
+                //    }
+                //}
             }
-            return RedirectToAction("Fail");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         public IActionResult Success()

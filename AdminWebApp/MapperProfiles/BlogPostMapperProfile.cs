@@ -9,7 +9,7 @@ namespace AdminWebApp.MapperProfiles
         public BlogPostMapperProfile()
         {
             CreateMap<UpdatePostViewModel, Post>();
-
+            CreateMap<BlogPostCreateViewModel, Post>();
         }
     }
 }

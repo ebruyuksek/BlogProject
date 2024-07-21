@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\lib\bootstrap\dist\**" />
+    <Compile Remove="wwwroot\lib\fontawesome-free-6.6.0-web\**" />
     <Content Remove="wwwroot\lib\bootstrap\dist\**" />
+    <Content Remove="wwwroot\lib\fontawesome-free-6.6.0-web\**" />
     <EmbeddedResource Remove="wwwroot\lib\bootstrap\dist\**" />
+    <EmbeddedResource Remove="wwwroot\lib\fontawesome-free-6.6.0-web\**" />
     <None Remove="wwwroot\lib\bootstrap\dist\**" />
+    <None Remove="wwwroot\lib\fontawesome-free-6.6.0-web\**" />
   </ItemGroup>
 
   <ItemGroup>

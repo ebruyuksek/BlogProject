@@ -1,21 +1,35 @@
 ﻿@using AdminWebApp.Models.BlogPost
 @model BlogPostListViewModel
 
-@{
-
-}
-
-<div>
-
-    <ul>
-        @foreach (var item in Model.BlogPosts)
-        {
-            <li>
-                @item.Title (@item.CreatedDateTime)
-            </li>
-        }
-    </ul>
-
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Blog Posts</h1>
 </div>
+<div class="table-responsive small">
+    <a href="@(Url.Action("Add"))" class="btn btn-warning"> <i class="fa fa-plus"></i> </a>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Updated Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.BlogPosts)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.CreatedDateTime.ToString("dd/MM/yyyy")</td>
+                    <td>@item.UpdatedDateTime.ToString("dd/MM/yyyy")</td>
+                    <td>Update</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
 
 

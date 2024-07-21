@@ -22,7 +22,6 @@ namespace Business.Concrete
             try
             {
                 post.CreatedDateTime = DateTime.Now;
-                post.PostCategoryId = 1;
                 _postDal.Add(post);
 
                 return true;
@@ -56,7 +55,7 @@ namespace Business.Concrete
         {
             try
             {
-                return _postDal.Get(x => x.Id == id, null); 
+                return _postDal.Get(x => x.Id == id, null);
             }
             catch (Exception ex)
             {
@@ -69,11 +68,30 @@ namespace Business.Concrete
         {
             using MainDbContext context = new MainDbContext();
             post.UpdatedDateTime = DateTime.Now;
+            try
+            {
+                _postDal.Update(post);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
 
-            context.Posts.Update(post);
-            context.SaveChanges();
+        }
 
-            return true;
+        public List<Post> GetAll()
+        {
+            try
+            {
+                _postDal.GetAll(null, null);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 

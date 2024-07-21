@@ -1,10 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using AdminWebApp.Models.BlogPost
+@model BlogPostCreateViewModel
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Create</h1>
+</div>
+
+<form asp-action="Add" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Title</label>
+                <input type="text" class="form-control" asp-for="Title">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label asp-for="PostCategoryId" class="form-label">Category</label>
+                <input type="text" class="form-control" asp-for="PostCategoryId">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="mb-3">
+                <label asp-for="Text" class="form-label">Text</label>
+                <textarea rows="4" class="form-control" asp-for="Text"></textarea>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>
 
 
 
-
-
-}
