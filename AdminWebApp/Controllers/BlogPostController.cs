@@ -1,10 +1,7 @@
 ﻿using AdminWebApp.Models.BlogPost;
 using AutoMapper;
-using Bogus;
 using Business.Abstract;
-using Business.Concrete;
 using Core.Entities;
-using DataAccess.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminWebApp.Controllers
@@ -22,20 +19,24 @@ namespace AdminWebApp.Controllers
 
         public IActionResult Index()
         {
-            
-            //return View(model);
+            var model = new BlogPostListViewModel();
+
+            var blogList = _postBusinessService.GetAll();
+
+            model.BlogPosts = _mapper.Map<List<BlogPostDto>>(blogList);
+
+            return View(model);
         }
 
         public IActionResult Add()
         {
-            
             return View();
         }
 
         [HttpPost]
         public IActionResult Add(BlogPostCreateViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -46,12 +47,27 @@ namespace AdminWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Edit(int id)
+        {
+            var post = _postBusinessService.GetById(id);
+            var model = _mapper.Map<UpdatePostViewModel>(post);
+
+            return View(model);
+        }
+
+        [HttpPost]
         public IActionResult Edit(UpdatePostViewModel updatePostViewModel)
         {
             var post = _mapper.Map<Post>(updatePostViewModel);
             _postBusinessService.Update(post);
 
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _postBusinessService.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

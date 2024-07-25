@@ -8,8 +8,9 @@ namespace AdminWebApp.MapperProfiles
     {
         public BlogPostMapperProfile()
         {
-            CreateMap<UpdatePostViewModel, Post>();
+            CreateMap<UpdatePostViewModel, Post>().ReverseMap();
             CreateMap<BlogPostCreateViewModel, Post>();
+            CreateMap<BlogPostDto, Post>().ReverseMap();
         }
     }
 }

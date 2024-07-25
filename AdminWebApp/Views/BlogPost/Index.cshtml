@@ -1,6 +1,61 @@
 ﻿@using AdminWebApp.Models.BlogPost
 @model BlogPostListViewModel
 
+<div id="deleteModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Are you sure you want to delete this post?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <a type="button"
+                   id="deleteBlogPostLink"
+                   class="btn btn-secondary"
+                   href="@(Url.Action("Delete", new { Id = 0 }))"
+                   onclick="showAlertMessage()">
+                    Yes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function generateDeleteLink(id) {
+        var modalBoxDeleteLinkElement = document.getElementById("deleteBlogPostLink");
+        modalBoxDeleteLinkElement.href = `/BlogPost/Delete/${id}`;
+        const modal = new bootstrap.Modal('#deleteModal');
+        modal.show();
+        modal.addEventListener('hidden.bs.modal', showAlertMessage);
+    }
+
+    function showAlertMessage() {
+        var bodyElement = document.getElementById("alertContainer");
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Başarıyla silindi.',
+            showConfirmButton: false,
+            timer: 2500,
+            target: bodyElement
+        });
+    }
+
+</script>
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Blog Posts</h1>
 </div>
@@ -16,20 +71,26 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var item in Model.BlogPosts)
             {
                 <tr>
                     <td>@item.Title</td>
                     <td>@item.CreatedDateTime.ToString("dd/MM/yyyy")</td>
-                    <td>@item.UpdatedDateTime.ToString("dd/MM/yyyy")</td>
-                    <td>Update</td>
+                    <td>@item.UpdatedDateTime?.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a class="btn btn-warning" href="@(Url.Action("Edit", new { Id = item.Id }))">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <button class="btn btn-danger" onclick="generateDeleteLink(@item.Id)">
+                            <i class="fa-solid fa-delete-left"></i>
+                        </button>
+                    </td>
                 </tr>
-
             }
         </tbody>
     </table>
 </div>
+
 
 
 

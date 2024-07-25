@@ -85,11 +85,11 @@ namespace Business.Concrete
         {
             try
             {
-                _postDal.GetAll(null, null);
+                return _postDal.GetAll(null, null);
             }
             catch (Exception ex)
             {
-
+                _logger.Log(LogLevel.Error, ex.Message);
                 throw;
             }
         }
