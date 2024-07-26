@@ -1,0 +1,63 @@
+﻿@using AdminWebApp.Models.Comment
+@model CommentListViewModel
+
+<script>
+    function showAlertMessage(actionMessage) {
+        var alertContainerElement = document.getElementById("alertContainer");
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: actionMessage,
+            showConfirmButton: false,
+            timer: 1500,
+            target: alertContainerElement
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    @{
+        if (Model.IsActionHasOccured)
+        {
+            <text>
+                var actionMessage = '@(Model.ActionMessage)';
+                showAlertMessage(actionMessage);
+            </text>
+        }
+    }
+            });
+
+</script>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Post Categories</h1>
+</div>
+<div class="table-responsive small">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Text</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CommentList)
+            {
+                <tr>
+                    <td>(@item.Text.Substring(0,10))... </td>
+                    <td>@item.CreatedDateTime.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a class="btn btn-warning" href="@(Url.Action("Edit", new { Id = item.Id }))">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

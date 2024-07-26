@@ -14,6 +14,9 @@ builder.Services.AddScoped<IAdminUserDal, AdminUserDal>();
 builder.Services.AddScoped<IAdminUserService, AdminUserService>();
 builder.Services.AddScoped<IPostCategoryDal, PostCategoryDal>();
 builder.Services.AddScoped<IPostCategoryService, PostCategoryService>();
+builder.Services.AddScoped<ICommentDal, CommentDal>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
