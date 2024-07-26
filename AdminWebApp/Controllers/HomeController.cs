@@ -1,9 +1,7 @@
 using AdminWebApp.Models;
 using AdminWebApp.Models.Login;
 using Business.Abstract;
-using DataAccess.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace AdminWebApp.Controllers
@@ -11,9 +9,9 @@ namespace AdminWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IAdminUserBusinessService _adminUserBusinessService;
+        private readonly IAdminUserService _adminUserBusinessService;
 
-        public HomeController(ILogger<HomeController> logger, IAdminUserBusinessService adminUserBusinessService)
+        public HomeController(ILogger<HomeController> logger, IAdminUserService adminUserBusinessService)
         {
             _logger = logger;
             _adminUserBusinessService = adminUserBusinessService;

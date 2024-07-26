@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Business.Concrete
 {
-    public class AdminUserBusinessService : IAdminUserBusinessService
+    public class AdminUserService : IAdminUserService
     {
         private readonly IAdminUserDal _adminUserDal;
         private readonly ILogger _logger;
-        public AdminUserBusinessService(IAdminUserDal adminUserDal, ILogger<AdminUserBusinessService> logger)
+        public AdminUserService(IAdminUserDal adminUserDal, ILogger<AdminUserService> logger)
         {
             _adminUserDal = adminUserDal;
             _logger = logger;   

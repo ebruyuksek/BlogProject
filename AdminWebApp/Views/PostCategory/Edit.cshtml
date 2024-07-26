@@ -1,5 +1,5 @@
-﻿@using AdminWebApp.Models.BlogPost
-@model UpdatePostViewModel
+﻿@using AdminWebApp.Models.PostCategory
+@model PostCategoryUpdateModel
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Edit</h1>
@@ -13,20 +13,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="mb-3">
-                <label asp-for="Title" class="form-label">Title</label>
-                <input type="text" class="form-control" asp-for="Title">
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label asp-for="PostCategoryId" class="form-label">Category</label>
-                <input type="text" class="form-control" asp-for="PostCategoryId">
+                <label asp-for="Name" class="form-label">Title</label>
+                <input type="text" class="form-control" asp-for="Name">
             </div>
         </div>
         <div class="col-md-12">
             <div class="mb-3">
-                <label asp-for="Text" class="form-label">Text</label>
-                <textarea rows="4" class="form-control" asp-for="Text"></textarea>
+                <label asp-for="IsPassive" class="form-label">Is Passive</label>
+                <input type="checkbox" asp-for="IsPassive">
             </div>
         </div>
         <div class="col-md-4">

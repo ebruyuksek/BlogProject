@@ -25,8 +25,7 @@
                 <a type="button"
                    id="deleteBlogPostLink"
                    class="btn btn-secondary"
-                   href="@(Url.Action("Delete", new { Id = 0 }))"
-                   onclick="showAlertMessage()">
+                   href="@(Url.Action("Delete", new { Id = 0 }))">
                     Yes
                 </a>
             </div>
@@ -34,25 +33,38 @@
     </div>
 </div>
 <script>
+
     function generateDeleteLink(id) {
         var modalBoxDeleteLinkElement = document.getElementById("deleteBlogPostLink");
         modalBoxDeleteLinkElement.href = `/BlogPost/Delete/${id}`;
         const modal = new bootstrap.Modal('#deleteModal');
         modal.show();
-        modal.addEventListener('hidden.bs.modal', showAlertMessage);
     }
 
-    function showAlertMessage() {
-        var bodyElement = document.getElementById("alertContainer");
+    function showAlertMessage(actionMessage) {
+        var alertContainerElement = document.getElementById("alertContainer");
+
         Swal.fire({
-            position: 'top-end',
+            position: 'center',
             icon: 'success',
-            title: 'Başarıyla silindi.',
+            title: actionMessage,
             showConfirmButton: false,
-            timer: 2500,
-            target: bodyElement
+            timer: 1500,
+            target: alertContainerElement
         });
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        @{
+            if (Model.IsActionHasOccured)
+            {
+                <text>
+                    var actionMessage = '@(Model.ActionMessage)';
+                    showAlertMessage(actionMessage);
+                </text>
+            }
+        }
+    });
 
 </script>
 

@@ -2,7 +2,6 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
-using Microsoft.Extensions.DependencyModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IPostDal, PostDal>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IAdminUserDal, AdminUserDal>();
-builder.Services.AddScoped<IAdminUserBusinessService, AdminUserBusinessService>();
+builder.Services.AddScoped<IAdminUserService, AdminUserService>();
+builder.Services.AddScoped<IPostCategoryDal, PostCategoryDal>();
+builder.Services.AddScoped<IPostCategoryService, PostCategoryService>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();

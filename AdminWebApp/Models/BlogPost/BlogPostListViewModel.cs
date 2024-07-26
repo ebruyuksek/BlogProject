@@ -3,6 +3,8 @@
     public class BlogPostListViewModel 
     {
         public List<BlogPostDto> BlogPosts { get; set; } = new List<BlogPostDto>();
+        public bool IsActionHasOccured { get; set; } = false;
+        public string? ActionMessage { get; set; }
     }
 
     public class BlogPostDto

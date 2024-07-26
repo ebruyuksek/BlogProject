@@ -17,9 +17,15 @@ namespace AdminWebApp.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(bool? isActionHasOccured, string? actionMessage)
         {
             var model = new BlogPostListViewModel();
+
+            if (isActionHasOccured != null || actionMessage != null)
+            {
+                model.IsActionHasOccured = isActionHasOccured ?? false;
+                model.ActionMessage = actionMessage;
+            }
 
             var blogList = _postBusinessService.GetAll();
 
@@ -44,7 +50,11 @@ namespace AdminWebApp.Controllers
             var post = _mapper.Map<Post>(model);
             _postBusinessService.Add(post);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new
+            {
+                actionMessage = "Blog post added successfully",
+                isActionHasOccured = true
+            });
         }
 
         public IActionResult Edit(int id)
@@ -61,13 +71,22 @@ namespace AdminWebApp.Controllers
             var post = _mapper.Map<Post>(updatePostViewModel);
             _postBusinessService.Update(post);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new
+            {
+                actionMessage = "Blog post updated successfully",
+                isActionHasOccured = true
+            });
         }
 
         public IActionResult Delete(int id)
         {
             _postBusinessService.Delete(id);
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new
+            {
+                isActionHasOccured = true,
+                actionMessage = $"Blog post deleted successfully"
+            });
         }
     }
 }
